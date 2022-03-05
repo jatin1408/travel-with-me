@@ -24,8 +24,9 @@ const tripSchema = mongoose.Schema(
       required: true,
       private: true, // used by the toJSON plugin
     },
-    vechileType: {
-      type: Array,
+    vechileId: {
+      type: [mongoose.SchemaTypes.ObjectId],
+      ref: 'Vehicle',
     },
     travelDate: {
       type: Date,
