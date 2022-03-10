@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const { toJSON, paginate } = require('./plugins');
 const { genderTypes } = require('../config/genderTypes');
+
 const tripSchema = mongoose.Schema(
   {
     userId: {
@@ -24,8 +25,8 @@ const tripSchema = mongoose.Schema(
       required: true,
       private: true, // used by the toJSON plugin
     },
-    vechileId: {
-      type: [mongoose.SchemaTypes.ObjectId],
+    vehicleId: {
+      type: mongoose.SchemaTypes.ObjectId,
       ref: 'Vehicle',
     },
     travelDate: {
@@ -66,7 +67,7 @@ tripSchema.plugin(paginate);
 tripSchema.pre('save', async function (next) {
   const user = this;
   if (user.isModified('peersGoing')) {
-    if (user.peersGoing.length == user.maxCapacity) {
+    if (user.peersGoing.length === user.maxCapacity) {
       user.isBooked = true;
     }
   }

@@ -3,6 +3,7 @@ const validator = require('validator');
 const bcrypt = require('bcryptjs');
 const { toJSON, paginate } = require('./plugins');
 const { roles } = require('../config/roles');
+const { genderTypes } = require('../config/genderTypes');
 
 const userSchema = mongoose.Schema(
   {
@@ -43,6 +44,32 @@ const userSchema = mongoose.Schema(
     isEmailVerified: {
       type: Boolean,
       default: false,
+    },
+    vehiclesId: [
+      {
+        type: mongoose.SchemaTypes.ObjectId,
+        ref: 'Vehicle',
+      },
+    ],
+    gender: {
+      type: String,
+      enum: [genderTypes.MALE, genderTypes.FEMALE, genderTypes.TRANSGENDER],
+    },
+    phoneNumber: {
+      type: String,
+      required: true,
+    },
+    kycNumber: {
+      type: String,
+      minLength: 12,
+      maxLength: 12,
+    },
+    isVerified: {
+      type: Boolean,
+      default: false,
+    },
+    profilePictureUrl: {
+      type: String,
     },
   },
   {

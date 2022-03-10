@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const { toJSON, paginate } = require('./plugins');
 const { vehicleTypes } = require('../config/vehicleTypes');
+
 const vehicleSchema = mongoose.Schema(
   {
     userId: {
