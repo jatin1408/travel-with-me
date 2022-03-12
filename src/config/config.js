@@ -27,7 +27,6 @@ const envVarsSchema = Joi.object()
   .unknown();
 
 const { value: envVars, error } = envVarsSchema.prefs({ errors: { label: 'key' } }).validate(process.env);
-
 if (error) {
   throw new Error(`Config validation error: ${error.message}`);
 }
@@ -35,6 +34,7 @@ if (error) {
 module.exports = {
   env: envVars.NODE_ENV,
   port: envVars.PORT,
+  matrixAPIKey: envVars.MATRIX_API_KEY,
   mongoose: {
     url: envVars.MONGODB_URL + (envVars.NODE_ENV === 'test' ? '-test' : ''),
     options: {
