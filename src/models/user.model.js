@@ -54,10 +54,19 @@ const userSchema = mongoose.Schema(
     gender: {
       type: String,
       enum: [genderTypes.MALE, genderTypes.FEMALE, genderTypes.TRANSGENDER],
-    },
-    phoneNumber: {
-      type: String,
       required: true,
+    },
+    phone: {
+      countryCode: {
+        type: String,
+        required: true,
+      },
+      phoneNumber: {
+        type: String,
+        required: true,
+        minLength: 10,
+        maxLength: 10,
+      },
     },
     kycNumber: {
       type: String,
